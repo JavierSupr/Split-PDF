@@ -616,6 +616,10 @@ class FormattedSplitPage(ctk.CTkFrame):
                 writer.write(f)
             output_files.append(save_path)
 
+        # Tambahkan file PDF asli ke dalam output_files
+        original_pdf = self.pdf_path.get()
+        output_files.append(original_pdf)
+
         # 2. Jika save_as_zip → buat zip, hapus file PDF splitted
         if self.save_as_zip.get() and output_files:
             base_name = os.path.splitext(self.pdf_path.get())[0]  # "kalender" dsb
@@ -628,8 +632,11 @@ class FormattedSplitPage(ctk.CTkFrame):
 
             # Hapus file PDF splitted
             for fpath in output_files:
-                if os.path.exists(fpath):
-                    os.remove(fpath)
+                if fpath != original_pdf and os.path.exists(fpath):
+                    try:
+                        os.remove(fpath)
+                    except PermissionError:
+                        messagebox.showwarning("Peringatan", f"Gagal menghapus {os.path.basename(fpath)} karena sedang digunakan.")
 
         messagebox.showinfo("Sukses", "Formatted Split Berhasil!")
 
