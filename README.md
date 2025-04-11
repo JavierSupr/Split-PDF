@@ -10,5 +10,3 @@ Sebuah aplikasi untuk memecah (split) file PDF. Dibuat dengan Python, CustomTkin
 ## Cara Menjalankan
 1. **Clone repository** ini atau download zip.
 2. **Masuk** ke folder executable, lalu jalankan PDF-Splitter.exe
-
-
